@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One-Pan Coconut Lemongrass Chicken | Interactive Recipe</title>
+  <meta name="description" content="Seared chicken thighs simmered in a fragrant base of lemongrass, garlic, ginger, chili, and rich coconut milk, brightened with fish sauce and fresh lime." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Fraunces (Editorial Culinary Serif) & Inter (Clean Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coconut: {
+              50: '#FAF8F5',
+              100: '#F3EFE6',
+              200: '#E6DEC8',
+              300: '#D5C7A3',
+            },
+            herb: {
+              50: '#F2F7F1',
+              100: '#E1EDE0',
+              500: '#3B7233',
+              600: '#2D5A27',
+              700: '#23471E',
+              800: '#1B3617',
+              900: '#132610',
+            },
+            turmeric: {
+              50: '#FFFBEB',
+              100: '#FEF3C7',
+              500: '#F59E0B',
+              600: '#D97706',
+              700: '#B45309',
+            }
+          },
+          fontFamily: {
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #1F2937;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Custom Checkbox Animation */
+    .recipe-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.35rem;
+      height: 1.35rem;
+      border: 2px solid #9CA3AF;
+      border-radius: 0.4rem;
+      background-color: #FFFFFF;
+      display: inline-grid;
+      place-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+    .recipe-checkbox:hover {
+      border-color: #2D5A27;
+      background-color: #F2F7F1;
+    }
+    .recipe-checkbox:checked {
+      background-color: #2D5A27;
+      border-color: #2D5A27;
+    }
+    .recipe-checkbox::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      transform: scale(0);
+      transition: 0.15s transform ease-in-out;
+      box-shadow: inset 1em 1em white;
+      transform-origin: center;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    .recipe-checkbox:checked::before {
+      transform: scale(1);
+    }
+
+    /* Value change pulse effect */
+    @keyframes scalePulse {
+      0% { background-color: rgba(217, 119, 6, 0.22); }
+      100% { background-color: transparent; }
+    }
+    .qty-updated {
+      animation: scalePulse 0.65s ease-out;
+      border-radius: 0.25rem;
+    }
+
+    /* Print Styling for Clean 1-2 Page Recipe Sheet */
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-inside-avoid {
+        break-inside: avoid;
+      }
+      .print-border {
+        border: 1px solid #E5E7EB !important;
+        box-shadow: none !important;
+      }
+      .print-full-width {
+        grid-column: span 12 / span 12 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-herb-600 selection:text-white">
+
+  <!-- Top Utility Bar -->
+  <header class="sticky top-0 z-30 bg-coconut-50/95 backdrop-blur-md border-b border-coconut-200 no-print">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <!-- Brand / Recipe Badge -->
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-herb-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+          <!-- Lemongrass / Herb SVG Icon -->
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+        </div>
+        <div class="truncate">
+          <span class="text-xs font-semibold uppercase tracking-wider text-herb-600 block">Southeast Asian Kitchen</span>
+          <p class="text-sm font-bold text-gray-900 truncate">Coconut Lemongrass Chicken</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Cook Mode (Wake Lock) Toggle -->
+        <button id="wakeLockBtn" onclick="toggleWakeLock()" type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-coconut-200 bg-white text-gray-700 hover:border-herb-600 hover:text-herb-600 transition shadow-sm"
+          title="Keep screen awake while cooking">
+          <span id="wakeLockDot" class="w-2 h-2 rounded-full bg-gray-300 transition-colors"></span>
+          <span class="hidden sm:inline">Cook Mode</span>
+          <span class="sm:hidden">Awake</span>
+        </button>
+
+        <!-- Copy Shopping List -->
+        <button onclick="copyShoppingList()" type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-coconut-200 bg-white text-gray-700 hover:border-herb-600 hover:text-herb-600 transition shadow-sm"
+          title="Copy scaled ingredients to clipboard">
+          <svg class="w-4 h-4 text-herb-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          <span class="hidden md:inline">Copy List</span>
+        </button>
+
+        <!-- Print / PDF -->
+        <button onclick="window.print()" type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-coconut-200 bg-white text-gray-700 hover:border-herb-600 hover:text-herb-600 transition shadow-sm"
+          title="Print or Save as PDF">
+          <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span class="hidden md:inline">Print</span>
+        </button>
+
+        <!-- Share Recipe Button -->
+        <button onclick="openShareModal()" type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-herb-600 text-white hover:bg-herb-700 active:scale-95 transition shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+          </svg>
+          <span>Share</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+
+    <!-- Hero Recipe Card -->
+    <section class="bg-white rounded-3xl border border-coconut-200 shadow-sm overflow-hidden print-border">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        
+        <!-- Left Column: Title, Story & Metadata -->
+        <div class="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+          <div>
+            <!-- Cuisine & Dietary Tags -->
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-herb-50 text-herb-700 border border-herb-100">
+                🌿 One-Pan Skillet
+              </span>
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-turmeric-50 text-turmeric-700 border border-turmeric-100">
+                🥥 Dairy-Free & Gluten-Free Option
+              </span>
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-100">
+                🌶️ Customizable Heat
+              </span>
+            </div>
+
+            <!-- Recipe Title -->
+            <h1 class="font-serif text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-gray-900 leading-tight mb-4">
+              One-Pan Coconut Lemongrass Chicken
+            </h1>
+
+            <!-- Subtitle / Description -->
+            <p class="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
+              Seared chicken thighs simmered in a fragrant base of lemongrass, garlic, ginger, chili, and rich coconut milk, brightened with fish sauce and fresh lime.
+            </p>
+          </div>
+
+          <!-- Time & Yield Metrics -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-coconut-100">
+            <div class="bg-coconut-50/80 rounded-2xl p-3.5 border border-coconut-200/60">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider block">Prep Time</span>
+              <span class="text-lg font-bold text-gray-900 mt-0.5 block">15 mins</span>
+            </div>
+            <div class="bg-coconut-50/80 rounded-2xl p-3.5 border border-coconut-200/60">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider block">Cook Time</span>
+              <span class="text-lg font-bold text-gray-900 mt-0.5 block">20 mins</span>
+            </div>
+            <div class="bg-coconut-50/80 rounded-2xl p-3.5 border border-coconut-200/60">
+              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider block">Total Time</span>
+              <span class="text-lg font-bold text-herb-600 mt-0.5 block">35 mins</span>
+            </div>
+            <div class="bg-turmeric-50/80 rounded-2xl p-3.5 border border-turmeric-100">
+              <span class="text-xs font-medium text-turmeric-700 uppercase tracking-wider block">Active Yield</span>
+              <span id="heroYieldBadge" class="text-lg font-bold text-turmeric-700 mt-0.5 block">4 Servings</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Stylized Culinary Illustration & Flavor Profile -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-herb-800 via-herb-700 to-herb-900 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden no-print">
+          <!-- Decorative Background Pattern -->
+          <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-turmeric-500/15 blur-2xl pointer-events-none"></div>
+          <div class="absolute -left-12 -bottom-12 w-56 h-56 rounded-full bg-herb-500/20 blur-2xl pointer-events-none"></div>
+
+          <!-- Custom SVG Skillet Dish Visual -->
+          <div class="relative z-10 my-auto py-4 flex flex-col items-center text-center">
+            <div class="w-40 h-40 sm:w-44 sm:h-44 rounded-full bg-herb-900/50 border-4 border-coconut-100/20 shadow-2xl flex items-center justify-center p-4 mb-5 relative">
+              <!-- Skillet & Ingredients Illustration -->
+              <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                <!-- Golden Coconut Sauce Base -->
+                <circle cx="100" cy="100" r="82" fill="#F59E0B" opacity="0.9" />
+                <circle cx="100" cy="100" r="72" fill="#FEF3C7" opacity="0.25" />
+                <!-- Coconut Cream Swirls -->
+                <path d="M55 85 C70 65, 110 65, 135 85 C150 98, 130 130, 100 135 C75 138, 55 115, 70 98" fill="none" stroke="#FFFBEB" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
+                <!-- Seared Chicken Pieces -->
+                <rect x="62" y="68" width="34" height="26" rx="10" transform="rotate(-12 79 81)" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                <rect x="105" y="65" width="36" height="28" rx="10" transform="rotate(18 123 79)" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                <rect x="75" y="106" width="38" height="27" rx="11" transform="rotate(6 94 119)" fill="#D97706" stroke="#78350F" stroke-width="2"/>
+                <rect x="112" y="102" width="30" height="24" rx="9" transform="rotate(-20 127 114)" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                <!-- Diagonal Lemongrass Stalks -->
+                <line x1="45" y1="135" x2="145" y2="50" stroke="#86EFAC" stroke-width="6" stroke-linecap="round" />
+                <line x1="55" y1="145" x2="155" y2="60" stroke="#4ADE80" stroke-width="4" stroke-linecap="round" />
+                <!-- Fresh Lime Wedge -->
+                <path d="M130 125 A 22 22 0 0 1 160 155 Z" fill="#84CC16" stroke="#ECFCCB" stroke-width="3"/>
+                <!-- Red Bird's Eye Chili Slices -->
+                <circle cx="88" cy="60" r="5" fill="#DC2626" />
+                <circle cx="140" cy="98" r="4.5" fill="#DC2626" />
+                <circle cx="64" cy="112" r="5" fill="#DC2626" />
+                <!-- Cilantro / Thai Basil Leaves -->
+                <circle cx="102" cy="94" r="7" fill="#15803D" />
+                <circle cx="95" cy="99" r="5" fill="#22C55E" />
+                <circle cx="110" cy="98" r="5" fill="#16A34A" />
+              </svg>
+              <!-- Floating Aroma Badge -->
+              <span class="absolute -bottom-2 bg-turmeric-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                Rich & Aromatic
+              </span>
+            </div>
+
+            <h2 class="font-serif text-lg font-semibold text-coconut-50">Flavor Balance</h2>
+            <p class="text-xs text-coconut-200 mt-1 max-w-xs">
+              Creamy coconut milk balances bright citrusy lemongrass, savory fish sauce, and warm ginger.
+            </p>
+          </div>
+
+          <!-- Flavor Bars -->
+          <div class="relative z-10 space-y-2.5 bg-herb-900/40 p-4 rounded-2xl border border-white/10 text-xs">
+            <div>
+              <div class="flex justify-between mb-1 font-medium text-coconut-100">
+                <span>🥥 Creamy & Rich</span>
+                <span>90%</span>
+              </div>
+              <div class="w-full h-1.5 bg-white/15 rounded-full overflow-hidden">
+                <div class="bg-turmeric-500 h-full rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 font-medium text-coconut-100">
+                <span>🍋 Citrus & Lemongrass Aroma</span>
+                <span>95%</span>
+              </div>
+              <div class="w-full h-1.5 bg-white/15 rounded-full overflow-hidden">
+                <div class="bg-emerald-400 h-full rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 font-medium text-coconut-100">
+                <span>🌶️ Gentle Chili Warmth</span>
+                <span>60%</span>
+              </div>
+              <div class="w-full h-1.5 bg-white/15 rounded-full overflow-hidden">
+                <div class="bg-red-400 h-full rounded-full" style="width: 60%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Control Bar: Serving Size Scaler & Unit Switcher -->
+    <section class="bg-white rounded-3xl border border-coconut-200 p-5 sm:p-6 shadow-sm print-border">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        
+        <!-- Serving Size Adjuster -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div>
+            <label for="servingsCount" class="text-xs font-bold uppercase tracking-wider text-herb-600 block">
+              Adjust Servings
+            </label>
+            <p class="text-xs text-gray-500 mt-0.5">All quantities scale automatically</p>
+          </div>
+
+          <!-- Stepper Controls -->
+          <div class="flex items-center gap-2">
+            <div class="inline-flex items-center bg-coconut-50 border border-coconut-200 rounded-2xl p-1">
+              <button onclick="changeServings(-1)" type="button" aria-label="Decrease servings"
+                class="w-10 h-10 rounded-xl bg-white border border-coconut-200 text-gray-800 hover:bg-herb-600 hover:text-white hover:border-herb-600 active:scale-95 transition flex items-center justify-center font-bold text-lg shadow-sm no-print">
+                &minus;
+              </button>
+              <div class="px-4 text-center min-w-[5.5rem]">
+                <span id="servingsCount" class="text-2xl font-extrabold text-gray-900">4</span>
+                <span id="servingsLabel" class="text-xs font-medium text-gray-500 block -mt-1">servings</span>
+              </div>
+              <button onclick="changeServings(1)" type="button" aria-label="Increase servings"
+                class="w-10 h-10 rounded-xl bg-white border border-coconut-200 text-gray-800 hover:bg-herb-600 hover:text-white hover:border-herb-600 active:scale-95 transition flex items-center justify-center font-bold text-lg shadow-sm no-print">
+                &#43;
+              </button>
+            </div>
+
+            <!-- Quick Multiplier Pills -->
+            <div class="flex items-center gap-1.5 no-print" role="group" aria-label="Quick recipe multipliers">
+              <button onclick="setServings(2)" type="button" data-mult="2"
+                class="mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-coconut-200 bg-coconut-50 text-gray-700 hover:border-herb-600 transition">
+                &frac12;x <span class="hidden sm:inline text-gray-400">(2)</span>
+              </button>
+              <button onclick="setServings(4)" type="button" data-mult="4"
+                class="mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-herb-600 bg-herb-600 text-white transition shadow-sm">
+                1x <span class="hidden sm:inline opacity-80">(4)</span>
+              </button>
+              <button onclick="setServings(8)" type="button" data-mult="8"
+                class="mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-coconut-200 bg-coconut-50 text-gray-700 hover:border-herb-600 transition">
+                2x <span class="hidden sm:inline text-gray-400">(8)</span>
+              </button>
+              <button onclick="setServings(12)" type="button" data-mult="12"
+                class="mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-coconut-200 bg-coconut-50 text-gray-700 hover:border-herb-600 transition">
+                3x <span class="hidden sm:inline text-gray-400">(12)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unit Switcher & Reset Progress -->
+        <div class="flex flex-wrap items-center justify-between sm:justify-end gap-3 pt-4 lg:pt-0 border-t lg:border-t-0 border-coconut-100 no-print">
+          <!-- Unit Toggle Pills -->
+          <div class="inline-flex rounded-2xl bg-coconut-50 p-1 border border-coconut-200" role="group" aria-label="Unit system">
+            <button onclick="setUnitMode('both')" type="button" id="unitBtn-both"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-herb-700 shadow-sm transition">
+              Both Units
+            </button>
+            <button onclick="setUnitMode('metric')" type="button" id="unitBtn-metric"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition">
+              Metric (g/ml)
+            </button>
+            <button onclick="setUnitMode('imperial')" type="button" id="unitBtn-imperial"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition">
+              Imperial
+            </button>
+          </div>
+
+          <!-- Reset Checklist Button -->
+          <button onclick="resetChecklist()" type="button"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-red-600 hover:bg-red-50 transition"
+            title="Clear all checked ingredients and steps">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Reset Progress</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Main Recipe Grid: Ingredients (Left) & Instructions (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Interactive Ingredients List (5 cols on Desktop) -->
+      <section class="lg:col-span-5 bg-white rounded-3xl border border-coconut-200 p-6 sm:p-8 shadow-sm lg:sticky lg:top-20 print-border print-full-width">
+        <div class="flex items-center justify-between pb-4 mb-5 border-b border-coconut-100">
+          <div>
+            <h2 class="font-serif text-2xl font-bold text-gray-900">Ingredients</h2>
+            <p class="text-xs text-gray-500 mt-0.5">Tap items to check them off as you prep</p>
+          </div>
+          <span id="ingredientProgressBadge" class="px-3 py-1 rounded-full text-xs font-semibold bg-herb-50 text-herb-700 border border-herb-100 no-print">
+            0 / 18 prepped
+          </span>
+        </div>
+
+        <!-- Dynamic Ingredients Container -->
+        <div id="ingredientsContainer" class="space-y-6">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Bottom Copy List Action -->
+        <div class="mt-6 pt-5 border-t border-coconut-100 flex items-center justify-between gap-2 no-print">
+          <button onclick="copyShoppingList()" type="button"
+            class="w-full py-2.5 px-4 rounded-xl bg-coconut-50 hover:bg-herb-50 text-herb-700 font-semibold text-xs sm:text-sm border border-coconut-200 hover:border-herb-200 transition flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span>Copy Scaled Shopping List</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Column: Step-by-Step Instructions & Chef Notes (7 cols on Desktop) -->
+      <section class="lg:col-span-7 space-y-6 print-full-width">
+        
+        <!-- Cooking Steps Card -->
+        <div class="bg-white rounded-3xl border border-coconut-200 p-6 sm:p-8 shadow-sm print-border">
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-coconut-100">
+            <div>
+              <h2 class="font-serif text-2xl font-bold text-gray-900">Instructions</h2>
+              <p class="text-xs text-gray-500 mt-0.5">Click a step to mark complete, or start an inline timer</p>
+            </div>
+            <span id="stepProgressBadge" class="px-3 py-1 rounded-full text-xs font-semibold bg-turmeric-50 text-turmeric-700 border border-turmeric-100 no-print">
+              0 / 5 steps
+            </span>
+          </div>
+
+          <!-- Dynamic Steps Container -->
+          <div id="stepsContainer" class="space-y-5">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Optional Vegetable Add-Ins Callout Card -->
+        <div class="bg-gradient-to-br from-herb-50 to-coconut-100/70 rounded-3xl border border-herb-100 p-6 sm:p-7 shadow-sm print-break-inside-avoid print-border">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-2xl bg-herb-600 text-white flex items-center justify-center flex-shrink-0 text-xl shadow-sm">
+              🥦
+            </div>
+            <div>
+              <h3 class="font-serif text-lg font-bold text-herb-900">Optional Veggie Add-Ins</h3>
+              <p class="text-sm text-gray-700 leading-relaxed mt-1">
+                Want to make this a complete all-in-one skillet meal? Toss in <strong class="font-semibold text-herb-800">bell peppers, snap peas, baby corn, or broccoli florets</strong> during the last 4–5 minutes of simmering, or wilt in a generous handful of <strong class="font-semibold text-herb-800">baby spinach or bok choy</strong> right before taking the pan off the heat.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Kitchen Timers Bar (Appears when any timer is started) -->
+        <div id="activeTimersPanel" class="hidden bg-gray-900 text-white rounded-3xl p-5 shadow-lg no-print">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-turmeric-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-turmeric-400 animate-ping"></span>
+              Active Kitchen Timers
+            </span>
+            <button onclick="clearAllTimers()" class="text-xs text-gray-400 hover:text-white">Dismiss All</button>
+          </div>
+          <div id="timersList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 border-t border-coconut-200 mt-8 text-center sm:flex sm:items-center sm:justify-between text-xs text-gray-500 no-print">
+    <p>One-Pan Coconut Lemongrass Chicken &bull; Interactive Recipe Card</p>
+    <div class="mt-2 sm:mt-0 flex items-center justify-center gap-4">
+      <button onclick="openShareModal()" class="text-herb-600 font-semibold hover:underline">Share or Host Online</button>
+      <span>&bull;</span>
+      <button onclick="window.print()" class="hover:text-gray-800">Print Recipe</button>
+    </div>
+  </footer>
+
+  <!-- Share & Publish Modal -->
+  <div id="shareModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4 no-print" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-coconut-200 space-y-6 animate-fadeIn">
+      <div class="flex items-start justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-herb-600">Share & Export</span>
+          <h3 id="shareModalTitle" class="font-serif text-2xl font-bold text-gray-900 mt-0.5">Share This Recipe</h3>
+        </div>
+        <button onclick="closeShareModal()" type="button" class="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-coconut-50">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Option 1: Share Link with Current Servings -->
+      <div class="bg-coconut-50 rounded-2xl p-4 border border-coconut-200 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-700">1. Share Link (Saves <span id="modalServingCount">4</span> Servings)</span>
+          <span class="text-[11px] font-medium text-herb-600 bg-herb-50 px-2 py-0.5 rounded-full">URL Synced</span>
+        </div>
+        <div class="flex gap-2">
+          <input id="shareUrlInput" type="text" readonly
+            class="w-full text-xs bg-white border border-coconut-200 rounded-xl px-3 py-2.5 text-gray-600 focus:outline-none" />
+          <button onclick="copyShareUrl()" type="button"
+            class="px-4 py-2.5 rounded-xl bg-herb-600 text-white text-xs font-semibold hover:bg-herb-700 whitespace-nowrap">
+            Copy Link
+          </button>
+        </div>
+      </div>
+
+      <!-- Option 2: Copy Full Formatted Recipe for Messaging Apps -->
+      <div class="bg-coconut-50 rounded-2xl p-4 border border-coconut-200 space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-gray-700 block">2. Send via WhatsApp / iMessage / Email</span>
+        <p class="text-xs text-gray-500">Copies the complete recipe text scaled to your current serving size (<span id="modalServingCountText">4</span> servings).</p>
+        <button onclick="copyFullRecipeText()" type="button"
+          class="w-full mt-2 py-2.5 px-4 rounded-xl bg-white border border-coconut-200 hover:border-herb-600 text-gray-800 font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition">
+          <svg class="w-4 h-4 text-herb-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span>Copy Full Recipe Text</span>
+        </button>
+      </div>
+
+      <!-- Option 3: How to Put This Page on the Internet for Free -->
+      <div class="bg-turmeric-50/70 rounded-2xl p-4 border border-turmeric-100 space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-turmeric-700 flex items-center gap-1.5">
+          🌐 Want a public web link to share with anyone?
+        </span>
+        <p class="text-xs text-gray-700 leading-relaxed">
+          Because this entire recipe app is self-contained in a single <code class="bg-white px-1.5 py-0.5 rounded border text-gray-800">index.html</code> file, you can host it online for free in 15 seconds:
+        </p>
+        <ol class="text-xs text-gray-600 list-decimal list-inside space-y-1 pt-1">
+          <li>Download or save this file as <code class="font-mono text-gray-800">index.html</code>.</li>
+          <li>Drag and drop it onto <strong>app.netlify.com/drop</strong>, <strong>tiiny.host</strong>, or <strong>GitHub Pages</strong>.</li>
+          <li>You’ll get an instant public URL you can text to friends & family!</li>
+        </ol>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="closeShareModal()" type="button" class="px-5 py-2 rounded-xl text-xs font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 no-print">
+    <div class="bg-gray-900 text-white px-4 py-3 rounded-2xl shadow-xl border border-white/10 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
+      <span id="toastIcon" class="text-emerald-400">✓</span>
+      <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    // --- 1. RECIPE DATA (Base = 4 Servings) ---
+    const BASE_SERVINGS = 4;
+    let currentServings = 4;
+    let unitMode = 'both'; // 'both' | 'metric' | 'imperial'
+    let checkedIngredients = new Set();
+    let checkedSteps = new Set();
+    let wakeLockSentinel = null;
+    let activeTimers = {};
+
+    const ingredientGroups = [
+      {
+        groupTitle: "The Chicken & Marinade",
+        items: [
+          {
+            id: "ing-chicken",
+            name: "boneless, skinless chicken thighs, cut into bite-sized pieces",
+            metricQty: 600,
+            metricUnit: "g",
+            imperialQty: 1.3,
+            imperialUnit: "lbs",
+            isWeightOrVol: true
+          },
+          {
+            id: "ing-mar-fish",
+            name: "fish sauce (or soy sauce)",
+            metricQty: 15,
+            metricUnit: "ml",
+            imperialQty: 1,
+            imperialUnit: "tbsp",
+            preferImperialFirst: true
+          },
+          {
+            id: "ing-mar-sugar",
+            name: "brown sugar or honey",
+            metricQty: 5,
+            metricUnit: "g",
+            imperialQty: 1,
+            imperialUnit: "tsp",
+            preferImperialFirst: true
+          },
+          {
+            id: "ing-mar-salt",
+            name: "kosher salt & freshly cracked black pepper",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 0.5,
+            imperialUnit: "tsp",
+            singleUnitOnly: true
+          }
+        ]
+      },
+      {
+        groupTitle: "The Aromatics",
+        items: [
+          {
+            id: "ing-lemongrass",
+            name: "fresh lemongrass",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 3,
+            imperialUnit: "stalks",
+            singleUnitOnly: true
+          },
+          {
+            id: "ing-garlic",
+            name: "garlic, finely minced",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 4,
+            imperialUnit: "cloves",
+            singleUnitOnly: true
+          },
+          {
+            id: "ing-ginger",
+            name: "fresh ginger (or galangal), finely grated or minced",
+            metricQty: 15,
+            metricUnit: "g",
+            imperialQty: 1,
+            imperialUnit: "tbsp",
+            isWeightOrVol: true
+          },
+          {
+            id: "ing-shallots",
+            name: "shallots, thinly sliced",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 2,
+            imperialUnit: "",
+            singleUnitOnly: true
+          },
+          {
+            id: "ing-chilies",
+            name: "Thai bird’s eye chilies (or 1 red chili), finely sliced",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 2,
+            imperialUnit: "",
+            singleUnitOnly: true
+          },
+          {
+            id: "ing-oil",
+            name: "neutral cooking oil (avocado, peanut, or sunflower oil)",
+            metricQty: 15,
+            metricUnit: "ml",
+            imperialQty: 1,
+            imperialUnit: "tbsp",
+            preferImperialFirst: true
+          }
+        ]
+      },
+      {
+        groupTitle: "The Coconut Sauce",
+        items: [
+          {
+            id: "ing-coconut",
+            name: "full-fat unsweetened coconut milk",
+            metricQty: 400,
+            metricUnit: "ml",
+            imperialQty: 1,
+            imperialUnit: "can",
+            isWeightOrVol: true
+          },
+          {
+            id: "ing-broth",
+            name: "chicken broth or water",
+            metricQty: 60,
+            metricUnit: "ml",
+            imperialQty: 0.25,
+            imperialUnit: "cup",
+            isWeightOrVol: true
+          },
+          {
+            id: "ing-sauce-fish",
+            name: "fish sauce",
+            metricQty: 15,
+            metricUnit: "ml",
+            imperialQty: 1,
+            imperialUnit: "tbsp",
+            preferImperialFirst: true
+          },
+          {
+            id: "ing-sauce-sugar",
+            name: "brown sugar or palm sugar",
+            metricQty: 5,
+            metricUnit: "g",
+            imperialQty: 1,
+            imperialUnit: "tsp",
+            preferImperialFirst: true
+          },
+          {
+            id: "ing-turmeric",
+            name: "turmeric powder (optional, for warmth and golden color)",
+            metricQty: null,
+            metricUnit: "",
+            imperialQty: 1,
+            imperialUnit: "tsp",
+            singleUnitOnly: true
+          }
+        ]
+      },
+      {
+        groupTitle: "To Finish",
+        items: [
+          {
+            id: "ing-lime",
+            name: "fresh lime (juiced)",
+            metricQty: 22,
+            metricUnit: "ml",
+            imperialQty: 1,
+            imperialUnit: "lime (~1.5 tbsp)",
+            customFormatter: (scale) => {
+              const limes = formatCulinaryFraction(1 * scale);
+              const tbsp = formatCulinaryFraction(1.5 * scale);
+              const ml = Math.round(22 * scale);
+              if (unitMode === 'metric') return `${limes} fresh lime (juiced, ~${ml} ml)`;
+              if (unitMode === 'imperial') return `${limes} fresh lime (juiced, ~${tbsp} tbsp)`;
+              return `${limes} fresh lime (juiced, about ${tbsp} tbsp / ${ml} ml)`;
+            }
+          },
+          {
+            id: "ing-herbs",
+            name: "Fresh cilantro, Thai basil, or sliced green onions for garnish (to taste)",
+            unscaled: true
+          },
+          {
+            id: "ing-rice",
+            name: "Steamed jasmine rice, for serving",
+            unscaled: true
+          }
+        ]
+      }
+    ];
+
+    const instructionSteps = [
+      {
+        id: "step-1",
+        title: "Prep the Lemongrass",
+        getText: (scale) => {
+          const stalks = formatCulinaryFraction(3 * scale);
+          return `Trim the tough root base and dry top half off the <strong>${stalks} lemongrass stalks</strong>. Peel away the tough outer 1–2 layers until you reach the pale, tender inner core. Lightly smash the stalks with the flat side of a heavy knife to release the oils, then very finely mince the tender white/pale-green parts. <span class="block mt-2 text-xs text-herb-700 bg-herb-50 p-2.5 rounded-xl border border-herb-100">💡 <em>Tip: Bruise the leftover tough upper stalks, tie them in a knot, and toss them into the sauce while simmering for extra aroma, then remove before serving.</em></span>`;
+        },
+        timers: []
+      },
+      {
+        id: "step-2",
+        title: "Marinate & Sear the Chicken",
+        getText: (scale) => {
+          const fishSauce = formatScaledInline(1, 'tbsp', 15, 'ml', scale);
+          const sugar = formatScaledInline(1, 'tsp', 5, 'g', scale);
+          return `Toss the chicken pieces in a bowl with the marinade fish sauce (<strong>${fishSauce}</strong>), brown sugar (<strong>${sugar}</strong>), salt, pepper, and <strong>half</strong> of the minced lemongrass. Let sit for 10–15 minutes. Heat the cooking oil in a large skillet or wok over medium-high heat. Sear the chicken in a single layer undisturbed for 3–4 minutes until deeply golden brown on the bottom. Flip and cook for 1–2 minutes, then transfer to a plate.`;
+        },
+        timers: [
+          { label: "Marinate (12m)", seconds: 12 * 60 },
+          { label: "Sear Chicken (4m)", seconds: 4 * 60 }
+        ]
+      },
+      {
+        id: "step-3",
+        title: "Build the Aromatic Base",
+        getText: () => {
+          return `Lower the heat to medium. In the same pan (keeping the rendered chicken fat), add the sliced shallots and sauté for 2 minutes until softened. Add the remaining minced lemongrass, garlic, ginger, and sliced chilies (plus turmeric, if using). Stir-fry for 1–2 minutes until fragrant, making sure the garlic doesn't burn.`;
+        },
+        timers: [
+          { label: "Sauté Shallots (2m)", seconds: 2 * 60 },
+          { label: "Bloom Aromatics (90s)", seconds: 90 }
+        ]
+      },
+      {
+        id: "step-4",
+        title: "Simmer in Coconut Milk",
+        getText: (scale) => {
+          const broth = formatScaledInline(0.25, 'cup', 60, 'ml', scale);
+          const coconut = formatScaledInline(1, 'can', 400, 'ml', scale);
+          return `Pour in the chicken broth (<strong>${broth}</strong>) to deglaze the pan, scraping up any browned bits from the bottom. Stir in the coconut milk (<strong>${coconut}</strong>), sauce fish sauce, and sugar (plus any reserved whole lemongrass knots). Bring to a gentle simmer. Return the chicken and accumulated juices to the pan. Simmer uncovered on medium-low heat for 8–10 minutes, stirring occasionally, until the chicken is cooked through and the sauce thickens to coat the back of a spoon.`;
+        },
+        timers: [
+          { label: "Simmer Sauce (9m)", seconds: 9 * 60 }
+        ]
+      },
+      {
+        id: "step-5",
+        title: "Balance & Serve",
+        getText: () => {
+          return `Remove the pan from the heat and discard any whole lemongrass stalks. Stir in the fresh lime juice. Taste and adjust: add a splash of fish sauce for more umami, lime juice for brightness, or a pinch of sugar to mellow the heat. Garnish with cilantro, Thai basil, or scallions and serve over steamed jasmine rice.`;
+        },
+        timers: []
+      }
+    ];
+
+    // --- 2. SMART FRACTION & QUANTITY FORMATTERS ---
+    function formatCulinaryFraction(val) {
+      if (val <= 0) return "0";
+      const whole = Math.floor(val + 0.01);
+      const rem = val - whole;
+
+      const fractions = [
+        { dec: 0, str: "" },
+        { dec: 0.125, str: "⅛" },
+        { dec: 0.25, str: "¼" },
+        { dec: 0.333, str: "⅓" },
+        { dec: 0.5, str: "½" },
+        { dec: 0.666, str: "⅔" },
+        { dec: 0.75, str: "¾" },
+        { dec: 1, str: "1" }
+      ];
+
+      let closest = fractions[0];
+      let minDiff = Math.abs(rem - fractions[0].dec);
+      for (const f of fractions) {
+        const diff = Math.abs(rem - f.dec);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = f;
+        }
+      }
+
+      if (closest.str === "1") {
+        return String(whole + 1);
+      }
+      if (whole === 0 && closest.str !== "") {
+        return closest.str;
+      }
+      if (closest.str === "") {
+        return String(whole || Number(val.toFixed(1)));
+      }
+      return `${whole} ${closest.str}`;
+    }
+
+    function formatMetric(val, unit) {
+      const scaled = val * (currentServings / BASE_SERVINGS);
+      if (unit === 'g' && scaled >= 1000) {
+        return `${Number((scaled / 1000).toFixed(2))} kg`;
+      }
+      if (unit === 'ml' && scaled >= 1000) {
+        return `${Number((scaled / 1000).toFixed(2))} L`;
+      }
+      if (scaled < 10) {
+        return `${Number(scaled.toFixed(1))} ${unit}`;
+      }
+      return `${Math.round(scaled)} ${unit}`;
+    }
+
+    function formatImperial(val, unit) {
+      const scaled = val * (currentServings / BASE_SERVINGS);
+      if (unit === 'lbs') {
+        return `${Number(scaled.toFixed(2))} lbs`;
+      }
+      const frac = formatCulinaryFraction(scaled);
+      if (!unit) return frac;
+      // Pluralize simple units if > 1
+      let displayUnit = unit;
+      if (scaled > 1.05) {
+        if (unit === 'can') displayUnit = 'cans';
+        if (unit === 'cup') displayUnit = 'cups';
+      } else if (scaled <= 1.05) {
+        if (unit === 'stalks') displayUnit = 'stalk';
+        if (unit === 'cloves') displayUnit = 'clove';
+      }
+      return `${frac} ${displayUnit}`;
+    }
+
+    function formatScaledInline(impVal, impUnit, metVal, metUnit, scale) {
+      const impStr = `${formatCulinaryFraction(impVal * scale)} ${impUnit}`;
+      const metStr = `${Math.round(metVal * scale)} ${metUnit}`;
+      if (unitMode === 'metric') return metStr;
+      if (unitMode === 'imperial') return impStr;
+      return `${impStr} / ${metStr}`;
+    }
+
+    function formatIngredientQuantity(item) {
+      const scale = currentServings / BASE_SERVINGS;
+      if (item.unscaled) return "";
+      if (item.customFormatter) return item.customFormatter(scale);
+
+      if (item.singleUnitOnly) {
+        return formatImperial(item.imperialQty, item.imperialUnit);
+      }
+
+      const metricStr = formatMetric(item.metricQty, item.metricUnit);
+      const imperialStr = formatImperial(item.imperialQty, item.imperialUnit);
+
+      if (unitMode === 'metric') return metricStr;
+      if (unitMode === 'imperial') return imperialStr;
+
+      // 'both' mode
+      if (item.preferImperialFirst) {
+        return `${imperialStr} (${metricStr})`;
+      }
+      return `${metricStr} (${imperialStr})`;
+    }
+
+    // --- 3. RENDER FUNCTIONS ---
+    function renderIngredients(animatePulse = false) {
+      const container = document.getElementById('ingredientsContainer');
+      let totalItems = 0;
+
+      container.innerHTML = ingredientGroups.map(group => {
+        const itemsHtml = group.items.map(item => {
+          totalItems++;
+          const isChecked = checkedIngredients.has(item.id);
+          const qtyText = formatIngredientQuantity(item);
+
+          return `
+            <li class="flex items-start gap-3 p-2 -mx-2 rounded-xl hover:bg-coconut-50/90 transition cursor-pointer select-none"
+                onclick="toggleIngredient('${item.id}')">
+              <input type="checkbox" class="recipe-checkbox mt-0.5"
+                ${isChecked ? 'checked' : ''}
+                onclick="event.stopPropagation(); toggleIngredient('${item.id}')"
+                aria-label="${item.name}" />
+              <div class="text-sm leading-snug ${isChecked ? 'line-through text-gray-400' : 'text-gray-800'}">
+                ${item.customFormatter
+                  ? `<span class="font-semibold text-gray-900 ${animatePulse ? 'qty-updated' : ''}">${qtyText}</span>`
+                  : `${qtyText ? `<span class="font-bold text-herb-700 ${animatePulse ? 'qty-updated' : ''}">${qtyText}</span> ` : ''}${item.name}`
+                }
+              </div>
+            </li>
+          `;
+        }).join('');
+
+        return `
+          <div class="print-break-inside-avoid">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-herb-600 mb-2.5 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-turmeric-500"></span>
+              ${group.groupTitle}
+            </h3>
+            <ul class="space-y-1.5">
+              ${itemsHtml}
+            </ul>
+          </div>
+        `;
+      }).join('');
+
+      // Update badge
+      const badge = document.getElementById('ingredientProgressBadge');
+      badge.textContent = `${checkedIngredients.size} / ${totalItems} prepped`;
+    }
+
+    function renderSteps() {
+      const container = document.getElementById('stepsContainer');
+      const scale = currentServings / BASE_SERVINGS;
+
+      container.innerHTML = instructionSteps.map((step, index) => {
+        const isChecked = checkedSteps.has(step.id);
+        const stepNum = index + 1;
+
+        const timersHtml = step.timers.length > 0 ? `
+          <div class="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-coconut-100 no-print" onclick="event.stopPropagation()">
+            ${step.timers.map((t, tIdx) => `
+              <button type="button"
+                onclick="startKitchenTimer('${step.id}-${tIdx}', '${t.label}', ${t.seconds})"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-turmeric-50 text-turmeric-700 hover:bg-turmeric-100 border border-turmeric-200/70 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Start Timer: ${t.label}</span>
+              </button>
+            `).join('')}
+          </div>
+        ` : '';
+
+        return `
+          <div onclick="toggleStep('${step.id}')"
+            class="group rounded-2xl border p-5 transition cursor-pointer print-break-inside-avoid ${
+              isChecked
+                ? 'bg-coconut-50/60 border-coconut-200 opacity-65'
+                : 'bg-white border-coconut-200 hover:border-herb-500/60 shadow-sm'
+            }">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-xl text-xs font-bold flex items-center justify-center transition ${
+                  isChecked ? 'bg-herb-600 text-white' : 'bg-herb-50 text-herb-700 border border-herb-200'
+                }">
+                  ${stepNum}
+                </span>
+                <h3 class="font-serif text-lg font-bold ${isChecked ? 'line-through text-gray-500' : 'text-gray-900'}">
+                  ${step.title}
+                </h3>
+              </div>
+              <input type="checkbox" class="recipe-checkbox"
+                ${isChecked ? 'checked' : ''}
+                onclick="event.stopPropagation(); toggleStep('${step.id}')"
+                aria-label="Mark step ${stepNum} complete" />
+            </div>
+            <p class="text-sm sm:text-base leading-relaxed ${isChecked ? 'line-through text-gray-400' : 'text-gray-700'} pl-9">
+              ${step.getText(scale)}
+            </p>
+            <div class="pl-9">
+              ${timersHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('stepProgressBadge').textContent = `${checkedSteps.size} / ${instructionSteps.length} steps`;
+    }
+
+    // --- 4. INTERACTIVE CONTROLS ---
+    function changeServings(delta) {
+      const next = Math.min(16, Math.max(1, currentServings + delta));
+      if (next !== currentServings) {
+        setServings(next);
+      }
+    }
+
+    function setServings(count) {
+      currentServings = Math.min(16, Math.max(1, parseInt(count, 10) || 4));
+      document.getElementById('servingsCount').textContent = currentServings;
+      document.getElementById('servingsLabel').textContent = currentServings === 1 ? 'serving' : 'servings';
+      document.getElementById('heroYieldBadge').textContent = `${currentServings} ${currentServings === 1 ? 'Serving' : 'Servings'}`;
+
+      // Highlight active multiplier button
+      document.querySelectorAll('.mult-btn').forEach(btn => {
+        const multVal = parseInt(btn.getAttribute('data-mult'), 10);
+        if (multVal === currentServings) {
+          btn.className = "mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-herb-600 bg-herb-600 text-white transition shadow-sm";
+        } else {
+          btn.className = "mult-btn px-3 py-2 rounded-xl text-xs font-semibold border border-coconut-200 bg-coconut-50 text-gray-700 hover:border-herb-600 transition";
+        }
+      });
+
+      syncUrlState();
+      renderIngredients(true);
+      renderSteps();
+    }
+
+    function setUnitMode(mode) {
+      unitMode = mode;
+      ['both', 'metric', 'imperial'].forEach(m => {
+        const btn = document.getElementById(`unitBtn-${m}`);
+        if (m === mode) {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-herb-700 shadow-sm transition";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 hover:text-gray-900 transition";
+        }
+      });
+      syncUrlState();
+      renderIngredients(true);
+      renderSteps();
+    }
+
+    function toggleIngredient(id) {
+      if (checkedIngredients.has(id)) {
+        checkedIngredients.delete(id);
+      } else {
+        checkedIngredients.add(id);
+      }
+      renderIngredients(false);
+    }
+
+    function toggleStep(id) {
+      if (checkedSteps.has(id)) {
+        checkedSteps.delete(id);
+      } else {
+        checkedSteps.add(id);
+      }
+      renderSteps();
+    }
+
+    function resetChecklist() {
+      checkedIngredients.clear();
+      checkedSteps.clear();
+      renderIngredients(false);
+      renderSteps();
+      showToast("Checklist progress reset");
+    }
+
+    // --- 5. BUILT-IN KITCHEN TIMERS & WEB AUDIO CHIME ---
+    function startKitchenTimer(timerId, label, durationSeconds) {
+      if (activeTimers[timerId]) {
+        clearInterval(activeTimers[timerId].interval);
+      }
+      activeTimers[timerId] = {
+        label,
+        remaining: durationSeconds,
+        total: durationSeconds,
+        paused: false
+      };
+
+      activeTimers[timerId].interval = setInterval(() => {
+        const t = activeTimers[timerId];
+        if (!t || t.paused) return;
+        t.remaining--;
+        if (t.remaining <= 0) {
+          clearInterval(t.interval);
+          t.remaining = 0;
+          playTimerChime();
+          showToast(`⏰ Timer finished: ${t.label}!`);
+        }
+        renderTimersPanel();
+      }, 1000);
+
+      renderTimersPanel();
+      showToast(`Started timer: ${label}`);
+    }
+
+    function togglePauseTimer(timerId) {
+      if (!activeTimers[timerId]) return;
+      activeTimers[timerId].paused = !activeTimers[timerId].paused;
+      renderTimersPanel();
+    }
+
+    function removeTimer(timerId) {
+      if (activeTimers[timerId]) {
+        clearInterval(activeTimers[timerId].interval);
+        delete activeTimers[timerId];
+      }
+      renderTimersPanel();
+    }
+
+    function clearAllTimers() {
+      Object.keys(activeTimers).forEach(id => clearInterval(activeTimers[id].interval));
+      activeTimers = {};
+      renderTimersPanel();
+    }
+
+    function renderTimersPanel() {
+      const panel = document.getElementById('activeTimersPanel');
+      const list = document.getElementById('timersList');
+      const keys = Object.keys(activeTimers);
+
+      if (keys.length === 0) {
+        panel.classList.add('hidden');
+        return;
+      }
+      panel.classList.remove('hidden');
+
+      list.innerHTML = keys.map(id => {
+        const t = activeTimers[id];
+        const mins = Math.floor(t.remaining / 60);
+        const secs = String(t.remaining % 60).padStart(2, '0');
+        const isDone = t.remaining === 0;
+
+        return `
+          <div class="flex items-center justify-between bg-gray-800 border ${isDone ? 'border-turmeric-400 animate-pulse' : 'border-gray-700'} rounded-2xl px-4 py-3">
+            <div>
+              <span class="text-xs text-gray-400 block">${t.label}</span>
+              <span class="text-xl font-mono font-bold ${isDone ? 'text-turmeric-400' : 'text-white'}">
+                ${isDone ? 'DONE!' : `${mins}:${secs}`}
+              </span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              ${!isDone ? `
+                <button onclick="togglePauseTimer('${id}')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-700 hover:bg-gray-600">
+                  ${t.paused ? 'Resume' : 'Pause'}
+                </button>
+              ` : ''}
+              <button onclick="removeTimer('${id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-white">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function playTimerChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.15 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.15);
+          osc.stop(ctx.currentTime + idx * 0.15 + 0.45);
+        });
+      } catch (e) {
+        // AudioContext blocked or unsupported
+      }
+    }
+
+    // --- 6. COOK MODE (SCREEN WAKE LOCK API) ---
+    async function toggleWakeLock() {
+      const dot = document.getElementById('wakeLockDot');
+      const btn = document.getElementById('wakeLockBtn');
+
+      if (!('wakeLock' in navigator)) {
+        showToast("Keep-Awake isn't supported on this browser");
+        return;
+      }
+
+      try {
+        if (wakeLockSentinel) {
+          await wakeLockSentinel.release();
+          wakeLockSentinel = null;
+          dot.className = "w-2 h-2 rounded-full bg-gray-300 transition-colors";
+          btn.classList.remove('border-herb-600', 'bg-herb-50', 'text-herb-700');
+          showToast("Cook Mode turned off");
+        } else {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+          btn.classList.add('border-herb-600', 'bg-herb-50', 'text-herb-700');
+          showToast("Cook Mode active: Screen will stay awake");
+          wakeLockSentinel.addEventListener('release', () => {
+            dot.className = "w-2 h-2 rounded-full bg-gray-300 transition-colors";
+          });
+        }
+      } catch (err) {
+        showToast("Cook Mode blocked by browser preview permissions");
+      }
+    }
+
+    // --- 7. SHARE, COPY & URL STATE SYNC ---
+    function syncUrlState() {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('servings', currentServings);
+        url.searchParams.set('units', unitMode);
+        window.history.replaceState({}, '', url.toString());
+      } catch (e) {
+        // Ignore in sandboxed iframe environments
+      }
+    }
+
+    function loadUrlState() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const s = parseInt(params.get('servings'), 10);
+        const u = params.get('units');
+        if (s && s >= 1 && s <= 16) {
+          currentServings = s;
+        }
+        if (u && ['both', 'metric', 'imperial'].includes(u)) {
+          unitMode = u;
+        }
+      } catch (e) {}
+    }
+
+    function copyToClipboard(text, successMsg) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (err) {
+        showToast("Could not copy automatically");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copyShoppingList() {
+      let lines = [
+        `🛒 SHOPPING LIST: One-Pan Coconut Lemongrass Chicken (${currentServings} Servings)`,
+        `----------------------------------------`
+      ];
+
+      ingredientGroups.forEach(group => {
+        lines.push(`\n[${group.groupTitle}]`);
+        group.items.forEach(item => {
+          const qty = formatIngredientQuantity(item);
+          const checkMark = checkedIngredients.has(item.id) ? '✓ ' : '☐ ';
+          if (item.customFormatter) {
+            lines.push(`${checkMark}${qty}`);
+          } else {
+            lines.push(`${checkMark}${qty ? qty + ' ' : ''}${item.name}`);
+          }
+        });
+      });
+
+      copyToClipboard(lines.join('\n'), `Shopping list (${currentServings} servings) copied!`);
+    }
+
+    function copyFullRecipeText() {
+      const scale = currentServings / BASE_SERVINGS;
+      let lines = [
+        `🥥 ONE-PAN COCONUT LEMONGRASS CHICKEN`,
+        `Servings: ${currentServings} | Prep: 15 mins | Cook: 20 mins | Total: 35 mins`,
+        `\n--- INGREDIENTS ---`
+      ];
+
+      ingredientGroups.forEach(group => {
+        lines.push(`\n${group.groupTitle}:`);
+        group.items.forEach(item => {
+          const qty = formatIngredientQuantity(item);
+          lines.push(`• ${item.customFormatter ? qty : (qty ? qty + ' ' : '') + item.name}`);
+        });
+      });
+
+      lines.push(`\n--- INSTRUCTIONS ---`);
+      instructionSteps.forEach((step, idx) => {
+        const cleanText = step.getText(scale).replace(/<[^>]*>?/gm, '');
+        lines.push(`\n${idx + 1}. ${step.title}: ${cleanText}`);
+      });
+
+      copyToClipboard(lines.join('\n'), "Full scaled recipe copied to clipboard!");
+      closeShareModal();
+    }
+
+    function openShareModal() {
+      document.getElementById('modalServingCount').textContent = currentServings;
+      document.getElementById('modalServingCountText').textContent = currentServings;
+      const shareInput = document.getElementById('shareUrlInput');
+      shareInput.value = window.location.href;
+
+      const modal = document.getElementById('shareModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('shareModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyShareUrl() {
+      const url = document.getElementById('shareUrlInput').value;
+      copyToClipboard(url, "Recipe link copied to clipboard!");
+    }
+
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-3');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2800);
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadUrlState();
+      setUnitMode(unitMode);
+      setServings(currentServings);
+    });
+  </script>
+</body>
+</html>
